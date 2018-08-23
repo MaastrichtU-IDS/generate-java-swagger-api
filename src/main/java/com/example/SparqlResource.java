@@ -34,7 +34,6 @@ import static com.github.tminglei.swagger.SwaggerContext.response;
 import static com.github.tminglei.swagger.SwaggerContext.sharing;
 import static com.github.tminglei.swagger.SwaggerContext.*;
 import static com.github.tminglei.bind.Simple.*;
-import static com.github.tminglei.bind.Mappings.*;
 import static com.github.tminglei.bind.Constraints.*;
 import static com.github.tminglei.bind.Processors.*;
 

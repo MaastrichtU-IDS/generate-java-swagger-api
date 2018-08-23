@@ -16,12 +16,16 @@
 
 package com.example;
 
+import com.github.tminglei.swagger.SharingHolder;
+import io.swagger.models.HttpMethod;
 import io.swagger.models.auth.In;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
+import static com.github.tminglei.bind.Constraints.required;
+import static com.github.tminglei.bind.Mappings.longv;
+import static com.github.tminglei.bind.Mappings.text;
+import static com.github.tminglei.bind.Simple.*;
 import static com.github.tminglei.swagger.SwaggerContext.*;
 
 public class Bootstrap extends HttpServlet {
@@ -52,6 +56,27 @@ public class Bootstrap extends HttpServlet {
               .externalDocs(externalDocs().description("Find out more about our store").url("http://swagger.io"))
       );
   }
+
+
+    static Mapping<?> getItemMapping = $(mapping(
+            field("id", $(longv()).desc("pet id").example(3).$$),
+            field("name", $(text(required())).desc("pet name").$$),
+            field("item category", $(text()).desc("category belonged to").$$)
+    )).refName("ItemRef").desc("Item info").$$;
+
+
+
+    static SharingHolder sharing = sharing().pathPrefix("/getItem").tag("getItem");
+
+    static {
+        sharing.operation(HttpMethod.GET, "/{prefix}:{identifier}")
+                .summary("A item query.")
+                .parameter(param(longv()).in("path").name("prefix").example(1l))
+                .parameter(param(longv()).in("path").name("identifier").example(1l))
+                .response(200, response(getItemMapping))
+                .response(404, response().description("item not found"))
+        ;
+    }
 
   /*  static SharingHolder sharing = sharing().pathPrefix("/sparql").tag("sparql");
 
