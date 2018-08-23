@@ -15,10 +15,12 @@
         </init-param>
         -->
 
+        <!-- Here we provide all the packages to analyze to find Swagger specs (mainly the sharing.operations ) defined in static blocks -->
         <init-param>
             <param-name>scan-packages-and-classes</param-name>
-            <param-value>com.example.resource; com.example.Bootstrap</param-value>
+            <param-value>com.example</param-value>
         </init-param>
+
 
         <!-- specify the requestURI relative to base path, to fetch your swagger json, default '/swagger.json'
         <init-param>
@@ -65,7 +67,7 @@
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.example.resource;io.swagger.jaxrs.listing</param-value>
+            <param-value>com.example;io.swagger.jaxrs.listing</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>

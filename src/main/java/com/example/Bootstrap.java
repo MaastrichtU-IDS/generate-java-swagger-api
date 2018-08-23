@@ -16,18 +16,13 @@
 
 package com.example;
 
+import io.swagger.models.auth.In;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import com.example.data.H2DB;
-import io.swagger.models.auth.In;
-
-import static com.github.tminglei.bind.Mappings.longv;
 import static com.github.tminglei.swagger.SwaggerContext.*;
-import static io.swagger.models.HttpMethod.GET;
-
-import com.github.tminglei.swagger.SharingHolder;
 
 public class Bootstrap extends HttpServlet {
   private static final long serialVersionUID = 1L;
@@ -58,7 +53,7 @@ public class Bootstrap extends HttpServlet {
       );
   }
 
-    static SharingHolder sharing = sharing().pathPrefix("/sparql").tag("sparql");
+  /*  static SharingHolder sharing = sharing().pathPrefix("/sparql").tag("sparql");
 
     static {
         sharing.operation(GET, "/:sparql<[0-9]+>")
@@ -67,7 +62,8 @@ public class Bootstrap extends HttpServlet {
                 .response(200, response().description("sparql found!"))
                 .response(404, response().description("sparql not found"))
         ;
-    }
+    }*/
+
 
   @Override
   public void init(ServletConfig config) throws ServletException {
