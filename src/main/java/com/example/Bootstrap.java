@@ -65,10 +65,12 @@ public class Bootstrap extends HttpServlet {
     }*/
 
 
+
+  /*
   @Override
   public void init(ServletConfig config) throws ServletException {
       //H2DB.setupDatabase();
-  }
+  }*/
 
 
 /*

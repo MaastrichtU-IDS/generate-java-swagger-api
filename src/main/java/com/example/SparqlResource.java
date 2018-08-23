@@ -46,7 +46,7 @@ public class SparqlResource {
     @GET
     @Path("/{query}")
     public Response getSparql(@PathParam("query") String query) {
-        return Response.ok().entity("{success: true}").build();
+        return Response.ok().entity("<xml>Success</xml>").build();
     }
 
 }
