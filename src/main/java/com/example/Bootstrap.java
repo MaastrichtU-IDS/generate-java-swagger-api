@@ -17,7 +17,9 @@
 package com.example;
 
 import com.github.tminglei.swagger.SharingHolder;
+import com.github.tminglei.swagger.SwaggerContext;
 import io.swagger.models.HttpMethod;
+import io.swagger.models.Swagger;
 import io.swagger.models.auth.In;
 
 import javax.servlet.http.HttpServlet;
@@ -38,8 +40,42 @@ import static com.github.tminglei.swagger.SwaggerContext.*;
 public class Bootstrap extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    static {  // for swagger
-        swagger().info(info()
+    static {
+        // Feed it a Swagger Java Object
+        Swagger swaggerObject = new Swagger();
+        swaggerObject.info(info().title("Bio2RDF")
+                .description("Bio2RDF is an open source project to generate and provide linked data for the life sciences.")
+                .termsOfService("https://github.com/bio2rdf/bio2rdf-scripts/wiki/Terms-of-use")
+                .contact(contact().name("Michel Dumontier").email("michel.dumontier@gmail.com"))
+                .license(license().name("MIT License")
+                        .url("https://github.com/bio2rdf/bio2rdf-scripts/blob/master/MIT-LICENSE.txt")
+                )
+        ).host("localhost:8002")
+                .basePath("/api")
+                .consumes("application/json").consumes("application/xml")
+                .produces("application/json").produces("application/xml")
+                .securityDefinition("api_key", apiKeyAuth("api_key", In.HEADER))
+                .securityDefinition("petstore_auth", oAuth2()
+                        .implicit("http://petstore.swagger.io/api/oauth/dialog")
+                        .scope("read:pets", "read your pets")
+                        .scope("write:pets", "modify pets in your account")
+                ).tag(tag("pet").description("Everything about your Pets")
+                .externalDocs(externalDocs().description("Find out more").url("http://swagger.io"))
+        ).tag(tag("store").description("Access to Petstore orders")
+        ).tag(tag("user").description("Operations about user")
+                .externalDocs(externalDocs().description("Find out more about our store").url("http://swagger.io"))
+        );
+
+        SwaggerContext.setInstance(new SwaggerContext(swaggerObject, null, null, null, null));
+
+    }
+    @GET
+    @Path("/{query}")
+    public Response getSparql(@PathParam("query") String query) {
+        return Response.ok().entity("<xml>Success</xml>").build();
+    }
+
+        /*swagger().info(info()
                 .title("Bio2RDF")
                 .description("Bio2RDF is an open source project to generate and provide linked data for the life sciences.")
                 .termsOfService("https://github.com/bio2rdf/bio2rdf-scripts/wiki/Terms-of-use")
@@ -86,9 +122,7 @@ public class Bootstrap extends HttpServlet {
     }
 
 
-    /**
-     * To describe the object returned by the API
-     */
+    // To describe the object returned by the API
     static Mapping<?> sparqlMapping = $(mapping(
             field("id", $(longv()).desc("pet id").example(3).$$),
             field("name", $(text(required())).desc("pet name").$$),
@@ -110,26 +144,10 @@ public class Bootstrap extends HttpServlet {
                 .response(200, response(sparqlMapping))
                 .response(404, response().description("sparql not found"))
         ;
-    }
-    @GET
-    @Path("/{query}")
-    public Response getSparql(@PathParam("query") String query) {
-        return Response.ok().entity("<xml>Success</xml>").build();
-    }
-
-  /*  static SharingHolder sharing = sharing().pathPrefix("/sparql").tag("sparql");
-
-    static {
-        sharing.operation(GET, "/:sparql<[0-9]+>")
-                .summary("A valid SPARQL query.")
-                .parameter(param(longv()).in("path").name("query").example(1l))
-                .response(200, response().description("sparql found!"))
-                .response(404, response().description("sparql not found"))
-        ;
     }*/
 
 
-/*
+/* Code for OpenAPI (swagger-models 2.0.0, but still only a release candidate, and 1.5 is newer. So OpenAPI not supported
   public static void main(String[] args) {
     OpenAPI api = generateApi();
 
