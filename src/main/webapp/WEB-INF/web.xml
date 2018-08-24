@@ -93,4 +93,15 @@
         <servlet-class>com.example.Bootstrap</servlet-class>
         <load-on-startup>2</load-on-startup>
     </servlet>
+
+    <!--servlet>
+        <servlet-name>SwaggerServlet</servlet-name>
+        <servlet-class>com.example.DisplaySwaggerJson</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SwaggerServlet</servlet-name>
+        <url-pattern>/swaggy</url-pattern>
+    </servlet-mapping-->
+
+
 </web-app>
