@@ -13,7 +13,6 @@
     <binder-swagger-version>0.8.0</binder-swagger-version>
     <jersey-version>1.19</jersey-version>
     <jetty-version>9.2.2.v20140723</jetty-version>
-    <logback-version>1.0.1</logback-version>
     <failsafe-version>2.18.1</failsafe-version>
   </properties>
 
@@ -118,7 +117,7 @@
           <stopPort>8079</stopPort>
           <stopKey>stopit</stopKey>
           <httpConnector>
-            <port>8002</port>
+            <port>8080</port>
             <idleTimeout>60000</idleTimeout>
           </httpConnector>
         </configuration>
