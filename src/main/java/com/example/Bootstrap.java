@@ -1,23 +1,27 @@
 /**
- *  Copyright 2015 SmartBear Software
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Copyright 2015 SmartBear Software
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 package com.example;
 
 import com.github.tminglei.swagger.SharingHolder;
 import com.github.tminglei.swagger.SwaggerContext;
+import com.github.tminglei.swagger.bind.MappingConverterImpl;
+import com.github.tminglei.swagger.fake.DataWriterImpl;
+import com.github.tminglei.swagger.route.RouteFactoryImpl;
+import com.github.tminglei.swagger.route.TreeRouterImpl;
 import io.swagger.models.HttpMethod;
 import io.swagger.models.Swagger;
 import io.swagger.models.auth.In;
@@ -66,14 +70,9 @@ public class Bootstrap extends HttpServlet {
                 .externalDocs(externalDocs().description("Find out more about our store").url("http://swagger.io"))
         );
 
-        SwaggerContext.setInstance(new SwaggerContext(swaggerObject, null, null, null, null));
+        SwaggerContext.setInstance(new SwaggerContext(swaggerObject, new MappingConverterImpl(), new TreeRouterImpl(),
+                new RouteFactoryImpl(), new DataWriterImpl()));
 
-    }
-    @GET
-    @Path("/{query}")
-    public Response getSparql(@PathParam("query") String query) {
-        return Response.ok().entity("<xml>Success</xml>").build();
-    }
 
         /*swagger().info(info()
                 .title("Bio2RDF")
@@ -97,7 +96,7 @@ public class Bootstrap extends HttpServlet {
         ).tag(tag("store").description("Access to Petstore orders")
         ).tag(tag("user").description("Operations about user")
                 .externalDocs(externalDocs().description("Find out more about our store").url("http://swagger.io"))
-        );
+        );*/
     }
 
 
@@ -106,7 +105,6 @@ public class Bootstrap extends HttpServlet {
             field("name", $(text(required())).desc("pet name").$$),
             field("item category", $(text()).desc("category belonged to").$$)
     )).refName("ItemRef").desc("Item info").$$;
-
 
 
     static SharingHolder sharing2 = sharing().pathPrefix("/getItem").tag("getItem");
@@ -144,7 +142,13 @@ public class Bootstrap extends HttpServlet {
                 .response(200, response(sparqlMapping))
                 .response(404, response().description("sparql not found"))
         ;
-    }*/
+    }
+
+    @GET
+    @Path("/{query}")
+    public Response getSparql(@PathParam("query") String query) {
+        return Response.ok().entity("<xml>Success</xml>").build();
+    }
 
 
 /* Code for OpenAPI (swagger-models 2.0.0, but still only a release candidate, and 1.5 is newer. So OpenAPI not supported
