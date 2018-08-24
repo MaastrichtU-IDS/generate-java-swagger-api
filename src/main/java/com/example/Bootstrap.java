@@ -46,7 +46,7 @@ public class Bootstrap extends HttpServlet {
 
     static {
         // Feed it a Swagger Java Object
-        Swagger swaggerObject = new Swagger();
+        /*Swagger swaggerObject = new Swagger();
         swaggerObject.info(info().title("Bio2RDF")
                 .description("Bio2RDF is an open source project to generate and provide linked data for the life sciences.")
                 .termsOfService("https://github.com/bio2rdf/bio2rdf-scripts/wiki/Terms-of-use")
@@ -71,10 +71,10 @@ public class Bootstrap extends HttpServlet {
         );
 
         SwaggerContext.setInstance(new SwaggerContext(swaggerObject, new MappingConverterImpl(), new TreeRouterImpl(),
-                new RouteFactoryImpl(), new DataWriterImpl()));
+                new RouteFactoryImpl(), new DataWriterImpl()));*/
 
 
-        /*swagger().info(info()
+        swagger().info(info()
                 .title("Bio2RDF")
                 .description("Bio2RDF is an open source project to generate and provide linked data for the life sciences.")
                 .termsOfService("https://github.com/bio2rdf/bio2rdf-scripts/wiki/Terms-of-use")
@@ -96,7 +96,7 @@ public class Bootstrap extends HttpServlet {
         ).tag(tag("store").description("Access to Petstore orders")
         ).tag(tag("user").description("Operations about user")
                 .externalDocs(externalDocs().description("Find out more about our store").url("http://swagger.io"))
-        );*/
+        );
     }
 
 
