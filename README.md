@@ -3,6 +3,15 @@
 ## Overview
 This is a Java project to build a stand-alone server generated from a Swagger Java object which implements the Swagger spec.  You can find out more about both the spec and the framework at http://swagger.io.
 
+We could also just run a Apache httpd to expose all generated JSON and generate swagger UI pages that point to them.
+
+```shell
+# Put everything in /data/jetty and everything accessible at http://localhost:8081/myfile.json
+docker run -dit --name httpd -p 8081:80 -v /data/jetty:/usr/local/apache2/htdocs/ httpd:2.4
+```
+
+
+
 ### To run (with Maven)
 To run the server, run this task:
 ```shell
