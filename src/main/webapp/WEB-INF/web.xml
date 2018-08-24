@@ -18,7 +18,7 @@
         <!-- Here we provide all the packages to analyze to find Swagger specs (mainly the sharing.operations ) defined in static blocks -->
         <init-param>
             <param-name>scan-packages-and-classes</param-name>
-            <param-value>com.example</param-value>
+            <param-value>com.example.Bootstrap</param-value>
         </init-param>
 
 

@@ -17,6 +17,8 @@
   </properties>
 
   <dependencies>
+
+
     <dependency>
       <groupId>com.github.tminglei</groupId>
       <artifactId>binder-swagger-java</artifactId>
