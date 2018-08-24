@@ -1,7 +1,7 @@
-# Swagger Sample App
+# generate-java-swagger-api
 
 ## Overview
-This is a java project to build a stand-alone server which implements the Swagger spec.  You can find out 
+This is a java project to build a stand-alone server generated from a Swagger java object which implements the Swagger spec.  You can find out
 more about both the spec and the framework at http://swagger.io.
 
 ### To run (with Maven)
