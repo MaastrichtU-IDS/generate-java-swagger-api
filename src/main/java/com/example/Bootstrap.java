@@ -38,7 +38,6 @@ import static com.github.tminglei.swagger.SwaggerContext.*;
 public class Bootstrap extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-
     static {  // for swagger
         swagger().info(info()
                 .title("Bio2RDF")
@@ -128,14 +127,6 @@ public class Bootstrap extends HttpServlet {
                 .response(404, response().description("sparql not found"))
         ;
     }*/
-
-
-
-  /*
-  @Override
-  public void init(ServletConfig config) throws ServletException {
-      //H2DB.setupDatabase();
-  }*/
 
 
 /*
